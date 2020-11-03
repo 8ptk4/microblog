@@ -1,3 +1,4 @@
+
 FROM python:3.6-alpine
 
 RUN adduser -D microblog
@@ -25,3 +26,33 @@ USER microblog
 
 EXPOSE 5000
 ENTRYPOINT ["./boot.sh"]
+
+
+# FROM python:3.6-alpine
+
+# RUN adduser -D microblog
+
+# WORKDIR /home/microblog
+
+# COPY app app
+# RUN ls
+# COPY migrations migrations
+# COPY requirements requirements
+# COPY requirements.txt microblog.py boot.sh ./
+
+# RUN python -m venv venv
+# ENV FLASK_APP microblog.py
+# RUN -m venv/bin/pip3 install -r requirements.txt
+
+# # RUN apk add binutils libc-dev
+# # RUN venv/bin/pip install gunicorn pymysql
+
+# # COPY microblog.py docker/boot.sh ./
+# RUN chmod +x boot.sh
+
+# RUN ls
+# RUN chown -R microblog:microblog ./
+# USER microblog
+
+# EXPOSE 5000
+# ENTRYPOINT ["./boot.sh"]
