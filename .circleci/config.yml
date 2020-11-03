@@ -3,74 +3,95 @@
 # Check https://circleci.com/docs/2.0/language-python/ for more details
 #
 version: 2.1
-executors:
-  docker-publisher:
-    environment:
-      IMAGE_NAME: 8ptk4/microblog_prod
-    docker:
-      - image: circleci/buildpack-deps:stretch
 jobs:
-  test:
-    machine: true
-    working_directory: ~/repo
-    environment:
-      FLASK_ENV: test
-      FLASK_APP: microblog.py
-    steps:
-      - checkout
-      - run:
-          name: run docker tests
-          command: |
-            make test
-
   build:
-    executor: docker-publisher
+    docker:
+      - image: circleci/python:3.7
+
+    working_directory: ~/repo
+
     steps:
       - checkout
-      - setup_remote_docker
       - run:
-          name: Build Docker image   
-          command: docker build -t $IMAGE_NAME:latest -f ./docker/Dockerfile_prod .
-      - run:
-          name: Archive Docker Image
-          command: docker save -o image.tar $IMAGE_NAME:latest
-      - persist_to_workspace:
-          root: .
-          paths:
-            - ./image.tar
+        name: install dependencies
+        command: 
+          python3 -m venv venv
+          . venv/bin/activate
+          pip install -r requirements.txt
+        
+    - run:
+        name: run tests
+        command:
+          . venv/bin/activate
+          make test
+# executors:
+#   docker-publisher:
+#     environment:
+#       IMAGE_NAME: 8ptk4/microblog_prod
+#     docker:
+#       - image: circleci/buildpack-deps:stretch
+# jobs:
+#   test:
+#     machine: true
+#     working_directory: ~/repo
+#     environment:
+#       FLASK_ENV: test
+#       FLASK_APP: microblog.py
+#     steps:
+#       - checkout
+#       - run:
+#           name: run docker tests
+#           command: |
+#             make test
 
-  publish-latest:
-    executor: docker-publisher
-    steps:
-      - attach_workspace:
-          at: /tmp/workspace
-      - setup_remote_docker
-      - run:
-          name: Load archived Docker image
-          command: docker load -i /tmp/workspace/image.tar
-      - run:
-          name: Publish Docker image to docker hub
-          command: |
-            echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-            docker push $IMAGE_NAME:latest
+#   build:
+#     executor: docker-publisher
+#     steps:
+#       - checkout
+#       - setup_remote_docker
+#       - run:
+#           name: Build Docker image   
+#           command: docker build -t $IMAGE_NAME:latest -f ./docker/Dockerfile_prod .
+#       - run:
+#           name: Archive Docker Image
+#           command: docker save -o image.tar $IMAGE_NAME:latest
+#       - persist_to_workspace:
+#           root: .
+#           paths:
+#             - ./image.tar
 
-workflows:
-  version: 2
-  build-master:
-    jobs:
-      - test:
-        filters:
-          branches:
-            only: master
-      - build:
-          requires:
-            - test
-          filters:
-            branches:
-              only: master
-      - publish-latest:
-          requires:
-            - build
-          filters:
-            branches:
-              only: master
+#   publish-latest:
+#     executor: docker-publisher
+#     steps:
+#       - attach_workspace:
+#           at: /tmp/workspace
+#       - setup_remote_docker
+#       - run:
+#           name: Load archived Docker image
+#           command: docker load -i /tmp/workspace/image.tar
+#       - run:
+#           name: Publish Docker image to docker hub
+#           command: |
+#             echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+#             docker push $IMAGE_NAME:latest
+
+# workflows:
+#   version: 2
+#   build-master:
+#     jobs:
+#       - test:
+#         filters:
+#           branches:
+#             only: master
+#       - build:
+#           requires:
+#             - test
+#           filters:
+#             branches:
+#               only: master
+#       - publish-latest:
+#           requires:
+#             - build
+#           filters:
+#             branches:
+#               only: master
