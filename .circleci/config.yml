@@ -13,17 +13,17 @@ jobs:
     steps:
       - checkout
       - run:
-        name: install dependencies
-        command:
-          python3 -m venv venv
-          . venv/bin/activate
-          pip install -r requirements.txt
-        
-    - run:
-        name: run tests
-        command:
-          . venv/bin/activate
-          make test
+          name: install dependencies
+          command:
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install -r requirements.txt
+      
+      - run:
+          name: run tests
+          command:
+            . venv/bin/activate
+            make test
 # executors:
 #   docker-publisher:
 #     environment:
