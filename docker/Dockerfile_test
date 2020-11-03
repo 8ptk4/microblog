@@ -2,7 +2,13 @@ FROM python:3.6-alpine
 
 WORKDIR /home/microblog
 
-COPY . .
+COPY requirements.txt requirements.txt
+COPY requirements requirements
+COPY Makefile Makefile
+COPY .pylintrc .pylintrc
+COPY pytest.ini pytest.ini
+COPY tests tests
+COPY app app
 
 RUN python -m venv venv
 RUN apk --update add --virtual build-dependencies libffi-dev openssl-dev make python3-dev py-pip build-base \
