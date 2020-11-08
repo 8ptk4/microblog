@@ -11,14 +11,19 @@ COPY tests tests
 COPY app app
 
 RUN python -m venv venv
-RUN apk --no-cache add --virtual build-dependencies libffi-dev=~3.3-r2 py-pip=~7.1.2-r0 openssl-dev=~1.1.1g-r0 make=~4.3-r0 python3-dev=3.8.5-r0 build-base=~0.5-r2 \
+
+# hadolint ignore=DL3019
+RUN apk --update add --virtual build-dependencies libffi-dev=~3.3-r2 py-pip=~7.1.2-r0 openssl-dev=~1.1.1g-r0 make=~4.3-r0 python3-dev=3.8.5-r0 build-base=~0.5-r2 \
     && venv/bin/pip install --upgrade pip \
     && venv/bin/pip install -r requirements/test.txt 
+
 RUN venv/bin/pip install gunicorn
 RUN venv/bin/pip install gunicorn pymysql
 RUN make install-test
 
 COPY docker/test.sh .
 RUN chmod +x test.sh
+
+
 
 ENTRYPOINT ["./test.sh"]
