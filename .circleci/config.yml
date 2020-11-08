@@ -64,8 +64,8 @@ workflows:
             only: master
       - docker/hadolint:
             name: hadolint
-            ignore-rules: DL4005,DL3008,DL3009,DL3015
-            dockerfiles: ./docker/Dockerfile_prod
+            ignore-rules: DL3019,DL3018
+            dockerfiles: ./docker/Dockerfile_prod:./docker/Dockerfile_test
       - build:
           requires:
             - test
