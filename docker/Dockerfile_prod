@@ -8,7 +8,6 @@ WORKDIR /home/microblog
 COPY requirements.txt requirements.txt
 COPY requirements requirements
 
-RUN apk add binutils libc-dev
 RUN python -m venv venv
 RUN venv/bin/pip install -r requirements.txt
 RUN venv/bin/pip install gunicorn pymysql

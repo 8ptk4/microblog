@@ -3,6 +3,12 @@ app.db
 aws_keys.yml
 logs/
 
+# Ignore certificates
+*.pem
+*.pfx
+*.cer
+*.crt
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
