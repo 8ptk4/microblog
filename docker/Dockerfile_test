@@ -12,8 +12,8 @@ COPY app app
 
 RUN python -m venv venv
 
-# hadolint ignore=DL3019
-RUN apk --update add --virtual build-dependencies libffi-dev=~3.3-r2 py-pip=~7.1.2-r0 openssl-dev=~1.1.1g-r0 make=~4.3-r0 python3-dev=3.8.5-r0 build-base=~0.5-r2 \
+# hadolint ignore=DL3019,DL3018
+RUN apk --update add --virtual build-dependencies libffi-dev py-pip openssl-dev make python3-dev build-base \
     && venv/bin/pip install --upgrade pip \
     && venv/bin/pip install -r requirements/test.txt 
 
