@@ -11,7 +11,7 @@ COPY tests tests
 COPY app app
 
 RUN python -m venv venv
-RUN apk --update add --virtual build-dependencies libffi-dev openssl-dev make python3-dev py-pip build-base \
+RUN apk --no-cache add --virtual build-dependencies=~20201108.070132 libffi-dev=~3.3-r2 openssl-dev=~1.1.1g-r0 make=~4.3-r0 python3-dev=3.8.5-r0 build-base=~0.5-r2 \
     && venv/bin/pip install --upgrade pip \
     && venv/bin/pip install -r requirements/test.txt 
 RUN venv/bin/pip install gunicorn
