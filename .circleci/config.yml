@@ -63,7 +63,7 @@ workflows:
           branches:
             only: master
       - docker/hadolint:
-            dockerfiles: './docker/Dockerfile_prod,./docker/Dockerfile_test'
+            dockerfiles: $IMAGE_NAME:latest -f ./docker/Dockerfile_prod
       - build:
           requires:
             - test
