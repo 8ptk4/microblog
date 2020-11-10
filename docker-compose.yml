@@ -20,6 +20,7 @@ services:
       dockerfile: docker/Dockerfile_prod
     links:
       - mysql:db
+    restart: always
     ports:
       - "5000:5000"
 
@@ -31,5 +32,6 @@ services:
       MYSQL_DATABASE: microblog
       MYSQL_USER: microblog
       MYSQL_PASSWORD: hemligt
+    restart: always
     volumes:
       - ./mysql-data:/var/lib/mysql

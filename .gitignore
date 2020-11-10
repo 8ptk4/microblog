@@ -1,13 +1,20 @@
+
 .env
 app.db
 aws_keys.yml
 logs/
+
+# Ignore mysql-data
+mysql-data/*
 
 # Ignore certificates
 *.pem
 *.pfx
 *.cer
 *.crt
+
+# Ignore .circleci
+# .circleci/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
