@@ -1,18 +1,16 @@
-
 .env
 app.db
 aws_keys.yml
 logs/
-
-# Ignore mysql-data and test-data
-mysql-data/*
-test-data/*
 
 # Ignore certificates
 *.pem
 *.pfx
 *.cer
 *.crt
+
+# Ignore mysql-data folder
+
 
 # Ignore .circleci
 # .circleci/

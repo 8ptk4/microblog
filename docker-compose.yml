@@ -8,6 +8,9 @@ services:
     build:
       context: .
       dockerfile: docker/Dockerfile_test
+    volume:
+      - ./test-data:/var/lib/test
+
 
   prod:
     container_name: microblog_prod
