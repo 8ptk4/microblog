@@ -40,3 +40,4 @@
             MYSQL_DATABASE: "{{ database_name }}"
             MYSQL_USER: "{{ database_user }}"
             MYSQL_PASSWORD: "{{ database_pass }}"
+            MYSQL_ROOT_PASSWORD: "{{ database_root_pass }}"

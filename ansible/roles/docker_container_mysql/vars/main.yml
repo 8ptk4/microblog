@@ -7,3 +7,4 @@ docker_container_ports: 3306:3306
 database_name: microblog
 database_user: microblog
 database_pass: hemligt
+database_root_pass: hemligt
