@@ -1,0 +1,15 @@
+---
+root_password: $6$kLeh9lGuyz$0zYtRh1PMOSfGHMJGA3oS8sM/pvCT92yVyZTyQNsAUjLcNoSlo4mMqcCPst6KJBKQ0Nd0XqnN9sG8qO8c4crv0
+
+packages:
+    -   fail2ban
+    -   tmux
+    -   git
+    -   unattended-upgrades
+
+server_user: deploy
+server_user_pass: $6$TGhNnD7Hp$QXeFCpFH3KKI1jBrJdbbN1y3Q6COdqQOHG6wSS/of1C4dhUkqx9lIXaBAJQl1q.U5lqC1jb1eM.U4z.w8y8Ci0
+server_user_groups:
+    -   sudo
+
+pub_ssh_key_location: ~/.ssh/azureci.pub

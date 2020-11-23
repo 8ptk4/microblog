@@ -1,0 +1,9 @@
+---
+docker_container_volume: ./mysql-data:/var/lib/mysql
+docker_container_name: microblog
+docker_container_image: mysql/mysql-server:5.7
+docker_container_ports: 3306:3306
+
+database_name: microblog
+database_user: microblog
+database_pass: $6$VXNPAyYcS$u0ufcvRkcnmCji3Ckx6mKntX0AuEhf72tsxtjbFvKDip9fuctVMIaru85z0Y91uWw9I.jGQWpqlHljZab0nN8.
