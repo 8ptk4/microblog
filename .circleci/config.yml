@@ -74,6 +74,9 @@ jobs:
           name: Execute Ansible playbook
           command: |
             . ../venv/bin/activate
+            pip install ansible
+            pip install ansible[azure]
+            pip install msrestazure
             ansible-playbook gather_vm_instances.yml docker_container_application.yml
           working_directory: ansible
 
