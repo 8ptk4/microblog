@@ -55,11 +55,20 @@ jobs:
             docker push $IMAGE_NAME:latest
   ansible-playbook:
     executor: docker-publisher
+
+    working_directory: ~/repo
+
     steps:
+      - checkout
       - run:
           name: Install Ansible 
           command: |
-            sudo pip install ansible[azure]
+            sudo apt-get update
+            sudo apt-get install python3-venv
+            python3 -m venv venv
+            . venv/bin/activate
+
+            pip install ansible[azure]
       - run:
           name: Execute Ansible playbook
           command: |
