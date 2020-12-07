@@ -59,11 +59,7 @@ jobs:
       - run:
           name: Install Ansible 
           command: |
-            sudo apt update -y
-            sudo apt-add-repository -y ppa:ansible/ansible 
-            sudo apt update -y
-            sudo pip install ansible
-            sudo pip ansible[azure]
+            sudo pip install ansible[azure]
       - run:
           name: Execute Ansible playbook
           command: |
