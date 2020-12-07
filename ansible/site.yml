@@ -14,8 +14,8 @@
 # -   import_playbook: docker_container_mysql.yml
 
 # # # APPLICATION
--   import_playbook: gather_vm_instances.yml
--   import_playbook: docker_container_application.yml
+# -   import_playbook: gather_vm_instances.yml
+# -   import_playbook: docker_container_application.yml
 
 # # BALANCER
 # -   import_playbook: gather_vm_instances.yml
