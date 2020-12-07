@@ -54,6 +54,7 @@ jobs:
             echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
             docker push $IMAGE_NAME:latest
   ansible-playbook:
+    executor: docker-publisher
     steps:
       - run:
           name: Install Ansible 
