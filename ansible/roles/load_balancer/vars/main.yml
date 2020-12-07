@@ -1,0 +1,5 @@
+---
+lb_method: ip_hash
+domain_name: puttekarlsson.xyz
+admin_email: putte.karlsson@gmail.com
+user: deploy

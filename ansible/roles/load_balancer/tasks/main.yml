@@ -1,0 +1,61 @@
+---
+-   name: Install latest version of nginx
+    apt: name=nginx state=latest update_cache=yes force_apt_get=yes
+    become: yes
+
+-   name: Install latest version of certbot
+    apt: name=python-certbot-nginx state=latest update_cache=yes force_apt_get=yes
+    become: yes
+
+-   name: Start nginx
+    service: name=nginx state=started
+    become: yes
+
+-   name: Check if certificate exsist
+    stat:
+        path: /etc/letsencrypt/live/{{ domain_name }}/cert.pem
+    register: letsencrypt_cert
+
+-   debug: msg="{{ letsencrypt_cert.stat.exists }}"
+
+-   name: Stop all services and generate cert
+    command: service nginx stop
+    when: not letsencrypt_cert.stat.exists
+
+-   name: Generate new cert if none exists
+    shell: "certbot certonly --standalone --noninteractive --expand --agree-tos --email {{ admin_email }} -d {{ domain_name }} -d www.{{ domain_name }}"
+    when: not letsencrypt_cert.stat.exists
+
+# https://docs.ansible.com/ansible/latest/collections/ansible/builtin/template_module.html
+-   name: Move nginx.conf to nginx
+    template:
+        src: nginx_config/nginx.conf.j2
+        dest: /etc/nginx/nginx.conf
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: "0644"
+
+-   name: Move load-balancer.conf to nginx/sites-available
+    template:
+        src: nginx_config/load-balancer.conf.j2
+        dest: /etc/nginx/sites-available/load-balancer.conf
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: "0644"
+
+# https://docs.ansible.com/ansible/latest/collections/ansible/builtin/file_module.html
+-   name: Create a symbolic link between sites-allowed and sites-enabled
+    file:
+        src: /etc/nginx/sites-available/load-balancer.conf
+        dest: /etc/nginx/sites-enabled/load-balancer.conf
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        state: link
+
+-   name: Remove default conf
+    file:
+        state: absent
+        path: /etc/nginx/sites-enabled/default
+
+-   name: Restart nginx service
+    command: service nginx restart
