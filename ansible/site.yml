@@ -20,3 +20,14 @@
 # # BALANCER
 # -   import_playbook: gather_vm_instances.yml
 # -   import_playbook: load_balancer.yml
+
+# # MONITORING
+# -   import_playbook: gather_vm_instances.yml
+# -   import_playbook: monitoring.yml
+
+
+# -   import_playbook: gather_vm_instances.yml
+# -   import_playbook: prometheus.yml
+
+-   import_playbook: gather_vm_instances.yml
+# -   import_playbook: grafana.yml

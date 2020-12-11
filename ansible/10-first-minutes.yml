@@ -1,8 +1,9 @@
 ---
 -   hosts:
-        -   database
-        -   appServer
-        -   loadBalancer
+        # -   database
+        # -   appServer
+        # -   loadBalancer
+        -   monitoringServer
     remote_user: azureuser
     become: yes
     become_method: sudo

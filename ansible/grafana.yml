@@ -1,0 +1,8 @@
+---
+-   hosts:
+        -   monitoringServer
+    remote_user: deploy
+    become: true
+    become_method: sudo
+    roles:
+        -   grafana

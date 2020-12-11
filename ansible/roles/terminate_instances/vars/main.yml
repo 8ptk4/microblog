@@ -1,6 +1,6 @@
 ---
 instances:
-    - name: appServer
-    - name: database
-    - name: loadBalancer
-    - name: monitoring
+    # - name: appServer
+    # - name: database
+    # - name: loadBalancer
+    - name: monitoringServer

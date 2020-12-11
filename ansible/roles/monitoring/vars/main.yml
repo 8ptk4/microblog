@@ -1,0 +1,14 @@
+---
+# docker_container_volume: ./mysql-data:/var/lib/mysql
+# docker_container_name: microblog_prod
+# docker_container_image: 8ptk4/microblog_prod:latest
+# docker_container_ports: 8000:5000
+
+# database_name: microblog
+# database_user: microblog
+# database_pass: hemligt
+# database_root_pass: hemligt
+tar: node_exporter-0.18.1.linux-amd64.tar.gz
+node_exporter: https://github.com/prometheus/node_exporter/releases/download/v0.18.1/{{ tar }}
+user: deploy
+
