@@ -1,0 +1,13 @@
+---
+### HÄR MÅSTE DET KOLLAS SÅ ATT DET INTE FINNS EN INSTANS AV CONTAINERN SOM KÖRS
+- name: Pull container and run it in background
+  command: "docker run -d \
+    --restart always \
+    -p 9113:9113 \
+    nginx/nginx-prometheus-exporter:0.4.2 \
+    -nginx.scrape-uri=https://{{ domain }}/metrics \
+    -nginx.retries=10 \
+    -nginx.ssl-verify=false \
+    -web.telemetry-path=/prometheus"
+
+

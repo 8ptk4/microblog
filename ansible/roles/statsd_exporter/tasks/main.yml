@@ -1,0 +1,33 @@
+---
+# Create metrics map
+# Start the docker image with the metrics map
+# Öppna port 9102 i appliotion security group
+# Uppdatera boot.sh
+
+# - name: Move
+#   template:
+#     src: sql/create_exporter_user.sql
+#     dest: /home/deploy/create_exporter_user.sql
+#     owner: "{{ user }}"
+#     group: "{{ user }}"
+#     mode: "0644"
+
+# - name: Enter into a running container and run a command
+#   shell: "docker exec -i microblog mysql -uroot -p{{ mysql_pass }} < /home/deploy/create_exporter_user.sql"
+#   ignore_errors: yes
+
+# - name: Pull Docker Image statsd-exporter
+#   docker_image:
+#     name: prom/statsd-exporter
+#     source: pull
+
+# - name: Copy config to server
+#   template:
+#       src: ./config/statsd.conf
+#       dest: statsd.conf
+#       owner: "{{ user }}"
+#       group: "{{ user }}"
+#       mode: "0644"
+
+- name: Run statsd-exporter with statsd.conf
+  command: docker run -dP --net=host -v ${PWD}/statsd.conf:/statsd/statsd.conf prom/statsd-exporter "--statsd.mapping-config=/statsd/statsd.conf"

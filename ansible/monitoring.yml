@@ -1,4 +1,5 @@
 ---
+-   import_playbook: mysqld_exporter.yml
 -   hosts:
         -   monitoringServer
     remote_user: deploy
@@ -6,4 +7,5 @@
     become_method: sudo
     roles:
         -   monitoring
-        # -   prometheus
+        -   prometheus
+        -   grafana

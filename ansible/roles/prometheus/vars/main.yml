@@ -9,6 +9,8 @@
 # database_pass: hemligt
 # database_root_pass: hemligt
 tar: node_exporter-0.18.1.linux-amd64.tar.gz
+version: 2.10.0
 prometheus: https://github.com/prometheus/prometheus/releases/download/v2.10.0/prometheus-2.10.0.linux-amd64.tar.gz
 user: deploy
+domain: puttekarlsson.xyz
 

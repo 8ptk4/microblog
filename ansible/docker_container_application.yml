@@ -7,3 +7,4 @@
     roles:
         -   docker_system
         -   docker_container_application
+        -   statsd_exporter

@@ -1,0 +1,4 @@
+---
+container_name: microblog
+mysql_pass: hemligt
+user: deploy

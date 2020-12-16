@@ -1,8 +1,8 @@
 ---
 # This block has to be ran first -------------
-# -   import_playbook: gather_vm_instances.yml
-# -   import_playbook: terminate_instances.yml
-# -   import_playbook: provision_instances.yml
+-   import_playbook: gather_vm_instances.yml
+-   import_playbook: terminate_instances.yml
+-   import_playbook: provision_instances.yml
 #---------------------------------------------
 
 # # # 10-FIRST-MINUTES 
@@ -24,10 +24,3 @@
 # # MONITORING
 # -   import_playbook: gather_vm_instances.yml
 # -   import_playbook: monitoring.yml
-
-
-# -   import_playbook: gather_vm_instances.yml
-# -   import_playbook: prometheus.yml
-
--   import_playbook: gather_vm_instances.yml
-# -   import_playbook: grafana.yml

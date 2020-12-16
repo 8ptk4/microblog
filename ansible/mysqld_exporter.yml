@@ -1,0 +1,8 @@
+---
+-   hosts:
+        -   database
+    remote_user: deploy
+    become: true
+    become_method: sudo
+    roles:
+        -   mysqld_exporter

@@ -1,0 +1,32 @@
+---
+- name: Move
+  template:
+    src: sql/create_exporter_user.sql
+    dest: /home/deploy/create_exporter_user.sql
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: "0644"
+
+- name: Enter into a running container and run a command
+  shell: "docker exec -i microblog mysql -uroot -p{{ mysql_pass }} < /home/deploy/create_exporter_user.sql"
+  ignore_errors: yes
+
+- name: Pull mysql-exporter
+  docker_image:
+    name: prom/mysqld-exporter
+    source: pull
+
+- name: Enter into a running container and run a command
+  command: "docker run -d \
+    -p 9104:9104 \
+    --network host \
+    -e DATA_SOURCE_NAME='exporter:hemligt@(localhost:3306)/' \
+    --restart always \
+    prom/mysqld-exporter:latest \
+    --collect.auto_increment.columns \
+    --collect.binlog_size \
+    --collect.engine_innodb_status \
+    --collect.engine_tokudb_status \
+    --collect.global_status"
+
+

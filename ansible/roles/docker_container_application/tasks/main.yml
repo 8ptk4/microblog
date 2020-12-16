@@ -1,8 +1,10 @@
 ---
+
 -   name: "Create application container"
     docker_container:
         name: "{{ docker_container_name }}"
         image: "{{ docker_container_image }}"
+        network_mode: host
         ports:
             - "{{ docker_container_ports }}"
         restart: true
