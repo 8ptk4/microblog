@@ -1,5 +1,5 @@
 ---
-- name: Move
+- name: Move create_exporter_user to /home/deploy/
   template:
     src: sql/create_exporter_user.sql
     dest: /home/deploy/create_exporter_user.sql
@@ -11,7 +11,7 @@
   shell: "docker exec -i microblog mysql -uroot -p{{ mysql_pass }} < /home/deploy/create_exporter_user.sql"
   ignore_errors: yes
 
-- name: Pull mysql-exporter
+- name: Pull Docker Image mysql-exporter
   docker_image:
     name: prom/mysqld-exporter
     source: pull

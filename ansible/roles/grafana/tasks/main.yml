@@ -15,11 +15,34 @@
   apt: deb="/tmp/{{ grafana_package_name }}.deb"
   when: grafana_package_check_deb.rc == 1
 
+- name: Add domain to grafana.ini
+  lineinfile:
+    path: /etc/grafana/grafana.ini
+    regexp: "^;domain"
+    line: "domain = {{ domain }}"
+    state: present
+
+- name: Add root_url to grafana.ini
+  lineinfile:
+    path: /etc/grafana/grafana.ini
+    regexp: "^;root_url"
+    line: 'root_url = %(protocol)s://%(domain)s/grafana/'
+    state: present
+  notify: restart_grafana
+
+- name: Add serve_from_sub_path
+  lineinfile:
+    path: "/etc/grafana/grafana.ini"
+    insertafter: "root_url = %(protocol)s://%(domain)s/grafana/"
+    line: "serve_from_sub_path = true"
+
 - name: Start service grafana, if not started
   service:
     name: grafana-server
+    enabled: true
     state: started
 
+- meta: flush_handlers
 
 
 

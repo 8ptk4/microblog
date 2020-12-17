@@ -5,11 +5,11 @@
     dest: /tmp/
     remote_src: yes
 
-- name: grupp
+- name: Create new node_exporter group
   group: name=node_exporter
   become: true
 
-- name: användare
+- name: Create new node_exporter user
   user:
     name: node_exporter
     group: node_exporter

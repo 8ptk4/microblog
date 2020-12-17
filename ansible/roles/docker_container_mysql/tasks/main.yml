@@ -1,15 +1,15 @@
 ---
--   name: "Create db container"
-    docker_container:
-        name: "{{ docker_container_name }}"
-        image: "{{ docker_container_image }}"
-        ports:
-            - "{{ docker_container_ports }}"
-        volumes:
-            -   "{{ docker_container_volume }}"
-        restart: true
-        env:
-            MYSQL_DATABASE: "{{ database_name }}"
-            MYSQL_USER: "{{ database_user }}"
-            MYSQL_PASSWORD: "{{ database_pass }}"
-            MYSQL_ROOT_PASSWORD: "{{ database_root_pass }}"
+- name: "Create db container"
+  docker_container:
+    name: "{{ docker_container_name }}"
+    image: "{{ docker_container_image }}"
+    ports:
+      - "{{ docker_container_ports }}"
+    volumes:
+      - "{{ docker_container_volume }}"
+    restart: true
+    env:
+      MYSQL_DATABASE: "{{ database_name }}"
+      MYSQL_USER: "{{ database_user }}"
+      MYSQL_PASSWORD: "{{ database_pass }}"
+      MYSQL_ROOT_PASSWORD: "{{ database_root_pass }}"

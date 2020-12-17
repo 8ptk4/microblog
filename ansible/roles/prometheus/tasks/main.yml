@@ -1,24 +1,23 @@
 ---
-- name: Creates directory
+- name: Create directory prometheus
   file:
-    path: /etc/prometheus
+    path: "{{ path }}"
     state: directory
 
 - name: Extract Downloaded Node Exporter
   unarchive:
     src: "{{ prometheus }}"
-    dest: /etc/prometheus
+    dest: "{{ path }}"
     remote_src: yes
 
 - name: Copy yml to /etc/prometheus
   template:
     src: config/prometheus.yml
-    dest: /etc/prometheus/prometheus-2.10.0.linux-amd64/prometheus.yml
+    dest: "{{ path }}"/prometheus-2.10.0.linux-amd64/prometheus.yml
 
-
-## DENNA STARTAS FORTFARANDE INTE SOM DEN SKA !!! PROBLEM !!!!!!
-- name: Run
-  shell: chdir=/etc/prometheus/prometheus-2.10.0.linux-amd64/ ./prometheus &
+# Doesnt work have to go in manually to run prometheus
+- name: Enter dir and run prometheus in the background
+  shell: chdir="{{ path }}"/prometheus-2.10.0.linux-amd64/ sudo ./prometheus &
 
 
 

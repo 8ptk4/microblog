@@ -1,14 +1,13 @@
 ---
-
--   name: "Create application container"
-    docker_container:
-        name: "{{ docker_container_name }}"
-        image: "{{ docker_container_image }}"
-        network_mode: host
-        ports:
-            - "{{ docker_container_ports }}"
-        restart: true
-        env:
-            FLASK_APP: microblog.py
-            FLASK_ENV: development
-            DATABASE_URL: mysql+pymysql://microblog:hemligt@{{ groups['database'][0] }}/microblog
+- name: "Create application container"
+  docker_container:
+    name: "{{ docker_container_name }}"
+    image: "{{ docker_container_image }}"
+    network_mode: host
+    ports:
+      - "{{ docker_container_ports }}"
+    restart: true
+    env:
+      FLASK_APP: microblog.py
+      FLASK_ENV: development
+      DATABASE_URL: mysql+pymysql://microblog:hemligt@{{ groups['database'][0] }}/microblog

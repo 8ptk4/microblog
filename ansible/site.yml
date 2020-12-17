@@ -1,8 +1,8 @@
 ---
 # This block has to be ran first -------------
--   import_playbook: gather_vm_instances.yml
--   import_playbook: terminate_instances.yml
--   import_playbook: provision_instances.yml
+# -   import_playbook: gather_vm_instances.yml
+# -   import_playbook: terminate_instances.yml
+# -   import_playbook: provision_instances.yml
 #---------------------------------------------
 
 # # # 10-FIRST-MINUTES 
@@ -18,8 +18,8 @@
 # -   import_playbook: docker_container_application.yml
 
 # # BALANCER
-# -   import_playbook: gather_vm_instances.yml
-# -   import_playbook: load_balancer.yml
+-   import_playbook: gather_vm_instances.yml
+-   import_playbook: load_balancer.yml
 
 # # MONITORING
 # -   import_playbook: gather_vm_instances.yml

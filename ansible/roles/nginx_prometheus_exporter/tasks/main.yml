@@ -1,6 +1,24 @@
 ---
-### HÄR MÅSTE DET KOLLAS SÅ ATT DET INTE FINNS EN INSTANS AV CONTAINERN SOM KÖRS
-- name: Pull container and run it in background
+- name: Get all running containers
+  docker_host_info:
+    containers: yes
+  register: docker_info
+
+- name: Stop all running containers
+  docker_container:
+    name: "{{ item }}"
+    state: stopped
+  loop: "{{ docker_info.containers | map(attribute='Id') | list }}"
+
+- name: Prune all containers and images
+  docker_prune:
+    containers: yes
+    images: yes
+    networks: yes
+    volumes: yes
+    builder_cache: yes
+
+- name: Pull prometheus exporter and run it in background
   command: "docker run -d \
     --restart always \
     -p 9113:9113 \
