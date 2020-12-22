@@ -15,7 +15,7 @@ RUN python -m venv venv
 # hadolint ignore=DL3019,DL3018
 RUN apk --update add --virtual build-dependencies libffi-dev py-pip openssl-dev make python3-dev build-base \
     && venv/bin/pip install --upgrade pip \
-    && venv/bin/pip install -r requirements/test.txt 
+    && venv/bin/pip install -r requirements/test.txt
 
 RUN venv/bin/pip install gunicorn
 RUN venv/bin/pip install gunicorn pymysql
