@@ -106,14 +106,13 @@ workflows:
       - snyk:
           requires:
             - test
+            - docker/hadolint
           filters:
             branches:
               only: master
       - build:
           requires:
             - test
-            - docker/hadolint
-            - snyk
           filters:
             branches:
               only: master
