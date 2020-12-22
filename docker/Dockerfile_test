@@ -20,6 +20,7 @@ RUN apk --update add --virtual build-dependencies libffi-dev py-pip openssl-dev 
 RUN venv/bin/pip install gunicorn
 RUN venv/bin/pip install gunicorn pymysql
 RUN make install-test
+RUN make bandit
 
 COPY docker/test.sh .
 RUN chmod +x test.sh
