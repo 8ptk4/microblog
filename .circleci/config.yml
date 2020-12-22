@@ -106,7 +106,7 @@ workflows:
       - snyk:
           requires:
             - test
-            - docker/hadolint
+            - hadolint
           filters:
             branches:
               only: master
