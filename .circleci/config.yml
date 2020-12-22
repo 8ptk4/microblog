@@ -39,7 +39,6 @@ jobs:
           root: .
           paths:
             - ./image.tar
-
   publish-latest:
     executor: docker-publisher
     steps:
@@ -58,9 +57,7 @@ jobs:
             docker push $IMAGE_NAME:latest
   ansible-playbook:
     executor: docker-publisher
-
     working_directory: ~/repo
-
     steps:
       - checkout
       - run:
@@ -81,7 +78,6 @@ jobs:
     docker:
       - image: circleci/python:3.5
     working_directory: ~/repo
-    
     steps:
       - checkout
       - run:
