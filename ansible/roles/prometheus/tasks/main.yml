@@ -1,23 +1,22 @@
 ---
 - name: Create directory prometheus
   file:
-    path: "{{ path }}"
+    path: /etc/prometheus
     state: directory
 
 - name: Extract Downloaded Node Exporter
   unarchive:
     src: "{{ prometheus }}"
-    dest: "{{ path }}"
+    dest: /etc/prometheus
     remote_src: yes
 
 - name: Copy yml to /etc/prometheus
   template:
     src: config/prometheus.yml
-    dest: "{{ path }}"/prometheus-2.10.0.linux-amd64/prometheus.yml
+    dest: /etc/prometheus/prometheus-2.10.0.linux-amd64/prometheus.yml
 
-# Doesnt work have to go in manually to run prometheus
-- name: Enter dir and run prometheus in the background
-  shell: chdir="{{ path }}"/prometheus-2.10.0.linux-amd64/ sudo ./prometheus &
+- name: Run
+  shell: chdir=/etc/prometheus/prometheus-2.10.0.linux-amd64/ sudo ./prometheus &
 
 
 

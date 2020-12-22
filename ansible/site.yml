@@ -1,21 +1,22 @@
 ---
-# This block has to be ran first -------------
--   import_playbook: gather_vm_instances.yml
--   import_playbook: terminate_instances.yml
--   import_playbook: provision_instances.yml
-#---------------------------------------------
+# # This block has to be ran first -------------
+# -   import_playbook: gather_vm_instances.yml
+# -   import_playbook: terminate_instances.yml
+# -   import_playbook: provision_instances.yml
+# #---------------------------------------------
 
-# # # 10-FIRST-MINUTES 
--   import_playbook: 10-first-minutes.yml
+# # # # 10-FIRST-MINUTES 
+# -   import_playbook: 10-first-minutes.yml
 
-# # # MYSQL
--   import_playbook: docker_container_mysql.yml
+# # # # MYSQL
+# -   import_playbook: docker_container_mysql.yml
 
-# # # APPLICATION
--   import_playbook: docker_container_application.yml
+# # # # APPLICATION
+# -   import_playbook: docker_container_application.yml
 
-# # BALANCER
--   import_playbook: load_balancer.yml
+# # # BALANCER
+# -   import_playbook: load_balancer.yml
 
 # # MONITORING
+-   import_playbook: gather_vm_instances.yml
 -   import_playbook: monitoring.yml
