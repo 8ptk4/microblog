@@ -171,6 +171,13 @@ bandit:
 
 
 
+# target: zap            				- Check vulnerabilities with zap
+.PHONY: zap
+zap:
+	@docker run --net host owasp/zap2docker-weekly zap-baseline.py -t https://www.puttekarlsson.xyz/
+
+
+
 ## target: clean-py                     - Remove generated python files
 .PHONY: clean-py
 clean-py:
