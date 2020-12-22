@@ -167,7 +167,7 @@ test-html: exec-tests
 # target: bandit   						- Run bandit tests on files under app directory
 .PHONY: bandit
 bandit:
-	bandit -r app
+	@bandit -r app
 
 
 
