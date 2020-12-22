@@ -75,6 +75,21 @@ jobs:
             . ../venv/bin/activate
             ansible-playbook gather_vm_instances.yml docker_container_application.yml
           working_directory: ansible
+  snyk:
+    docker:
+      - image: circleci/python:3.5
+    working_directory: ~/repo
+    
+    steps:
+      - checkout
+      - run:
+          name: install dependencies
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            make install
+      - run: echo "source ~/repo/venv/bin/activate" >> $BASH_ENV
+      - snyk/scan
 
 workflows:
   version: 2
@@ -88,9 +103,17 @@ workflows:
             name: hadolint
             ignore-rules: DL3019,DL3018
             dockerfiles: ./docker/Dockerfile_prod:./docker/Dockerfile_test
+      - snyk:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
       - build:
           requires:
             - test
+            - docker/hadolint
+            - snyk
           filters:
             branches:
               only: master
