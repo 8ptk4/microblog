@@ -72,10 +72,18 @@
     line: "AllowUsers {{ server_user }}"
     state: present
 
-- name: Remove default user
+- name: Remove default user   
   remote_user: "{{ server_user }}"
   user:
     name: "{{ root_user }}"
     state: absent
     force: yes
     remove: yes
+
+- name: Copy mozilla sshd_config
+  copy:
+    src: files/sshd_config
+    dest: /etc/ssh/sshd_config
+  notify:
+    - restart ssh
+  
