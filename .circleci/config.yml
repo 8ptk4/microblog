@@ -32,10 +32,10 @@ jobs:
       - setup_remote_docker
       - run:
           name: Build Docker image   
-          command: docker build -t $IMAGE_NAME:latest -f ./docker/Dockerfile_prod .
+          command: docker build -t $IMAGE_NAME:no-statsd -f ./docker/Dockerfile_prod .
       - run:
           name: Archive Docker Image
-          command: docker save -o image.tar $IMAGE_NAME:latest
+          command: docker save -o image.tar $IMAGE_NAME:no-statsd
       - persist_to_workspace:
           root: .
           paths:
