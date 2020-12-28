@@ -55,26 +55,26 @@ jobs:
           name: Publish Docker image to docker hub
           command: |
             echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-            docker push $IMAGE_NAME:latest
-  ansible-playbook:
-    executor: docker-publisher
-    working_directory: ~/repo
-    steps:
-      - checkout
-      - run:
-          name: Install Ansible 
-          command: |
-            sudo apt-get update
-            sudo apt-get install python3-venv
-            python3 -m venv venv
-            . venv/bin/activate
-            make install-deploy
-      - run:
-          name: Execute Ansible playbook
-          command: |
-            . ../venv/bin/activate
-            ansible-playbook gather_vm_instances.yml docker_container_application.yml
-          working_directory: ansible
+            docker push $IMAGE_NAME:no-statsd
+  # ansible-playbook:
+  #   executor: docker-publisher
+  #   working_directory: ~/repo
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         name: Install Ansible 
+  #         command: |
+  #           sudo apt-get update
+  #           sudo apt-get install python3-venv
+  #           python3 -m venv venv
+  #           . venv/bin/activate
+  #           make install-deploy
+  #     - run:
+  #         name: Execute Ansible playbook
+  #         command: |
+  #           . ../venv/bin/activate
+  #           ansible-playbook gather_vm_instances.yml docker_container_application.yml
+  #         working_directory: ansible
   snyk:
     docker:
       - image: circleci/python:3.5
@@ -121,10 +121,10 @@ workflows:
           filters:
             branches:
               only: master
-      - ansible-playbook:
-          requires:
-            - publish-latest
-          filters:
-            branches:
-              only: master
+      # - ansible-playbook:
+      #     requires:
+      #       - publish-latest
+      #     filters:
+      #       branches:
+      #         only: master
 
